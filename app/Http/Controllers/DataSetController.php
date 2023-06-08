@@ -29,7 +29,7 @@ class DataSetController extends Controller
             $start_date = $_GET['start_date'];
             $end_date = $_GET['end_date'];
             $users = User::where('birthday', '>=', $start_date)
-                ->orWhere('birthday', '<=', $end_date)
+                ->where('birthday', '<=', $end_date)
                 ->orderBy('id', 'desc')
                 ->simplePaginate(100);
 
