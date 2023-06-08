@@ -66,14 +66,10 @@ class DataSetController extends Controller
             for($count=0; $count<$total_row; $count++)
             {
                 $single_result = $statement->fetch(\PDO::FETCH_ASSOC);
-                $table_column_array = array_keys($single_result);
                 $table_value_array = array_values($single_result);
-                $output .= "\nINSERT INTO $table (";
-                $output .= "" . implode(", ", $table_column_array) . ") VALUES (";
-                $output .= "'" . implode("','", $table_value_array) . "');\n";
+                $output .= "" . implode("','", $table_value_array) . ";\n";
             }
-
-            $file_name = 'database_backup_on_' . date('y-m-d') . '.csv';
+            $file_name = 'dataset.csv';
             $file_handle = fopen($file_name, 'w+');
             fwrite($file_handle, $output);
             fclose($file_handle);
