@@ -12,7 +12,11 @@ class DataSetController extends Controller
 {
     public function index()
     {
-        $search = (isset($_GET['search'])? $_GET['search']: '');
+        $search = \request('search');
+        $start_date = \request('start_date');
+        $end_date = \request('end_date');
+
+        $search = (isset($search)? $search: '');
 
         if ($search != '' && isset($search))
         {
@@ -24,10 +28,8 @@ class DataSetController extends Controller
                 ->orWhere('birthday', 'LIKE', '%' . $search . '%')
                 ->orderBy('id','desc')->simplePaginate(100);
 
-        } elseif (isset($_GET['start_date']) && isset($_GET['end_date'])) {
+        } elseif (isset($start_date) && isset($end_date)) {
             //dogum tarixine gore axtaris
-            $start_date = $_GET['start_date'];
-            $end_date = $_GET['end_date'];
             $users = User::where('birthday', '>=', $start_date)
                 ->where('birthday', '<=', $end_date)
                 ->orderBy('id', 'desc')
