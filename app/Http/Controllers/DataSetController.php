@@ -22,9 +22,19 @@ class DataSetController extends Controller
                 ->orWhere('email', 'LIKE', '%' . $search . '%')
                 ->orWhere('gender', 'LIKE', '%' . $search . '%')
                 ->orWhere('birthday', 'LIKE', '%' . $search . '%')
-                ->orderBy('id','desc')->get();
-        } else {
-            $users = User::orderBy('id','desc')->simplePaginate(10);
+                ->orderBy('id','desc')->simplePaginate(100);
+
+        } elseif (isset($_GET['start_date']) && isset($_GET['end_date'])) {
+            //dogum tarixine gore axtaris
+            $start_date = $_GET['start_date'];
+            $end_date = $_GET['end_date'];
+            $users = User::where('birthday', '>=', $start_date)
+                ->orWhere('birthday', '<=', $end_date)
+                ->orderBy('id', 'desc')
+                ->simplePaginate(100);
+
+        }else {
+            $users = User::orderBy('id','desc')->simplePaginate(100);
         }
 
         return view('dashboard.index',compact('users'));

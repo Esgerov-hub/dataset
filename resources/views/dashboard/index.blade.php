@@ -79,6 +79,12 @@
                                     <div class="col-xxl-4 col-lg-6">
                                         <input type="search" name="search" class="form-control" id="searchInput" placeholder="Search" value="{{ old('search') }}">
                                     </div>
+                                    <div class="col-xxl-4 col-lg-6">
+                                        <input type="date" name="start_date" class="form-control" id="searchInput" placeholder="Search" value="{{ old('start_date') }}">
+                                    </div>
+                                    <div class="col-xxl-4 col-lg-6">
+                                        <input type="date" name="end_date" class="form-control" id="searchInput" placeholder="Search" value="{{ old('end_date') }}">
+                                    </div>
                                     <div class="col-xxl-2 col-lg-4">
                                         <button type="submit" class="btn btn-soft-secondary w-100"><i class="mdi mdi-search-web align-middle"></i> Search</button>
                                     </div>
@@ -110,14 +116,14 @@
                                         <td>{!! $user->lastname !!}</td>
                                         <td>{!! $user->email !!}</td>
                                         <td>{!! $user->gender !!}</td>
-                                        <td>{!! date('d.m.Y H:i:s',$user->birtday) !!}</td>
+                                        <td>{!! $user->birthday !!}</td>
                                     </tr>
                                         @endforeach
                                     @endif
                                     </tbody>
                                 </table>
                             </div>
-                            {!! $users->links() !!}
+                            {{$users->links()}}
 {{--                            <div class="row justify-content-between align-items-center">--}}
 
 {{--                                <div class="col-auto">--}}
